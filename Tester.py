@@ -86,7 +86,7 @@ def test(arq, cases):
     tester = Tester(arq, cases)
     tester.run_tests()
     tester.save_reports()
-    print('Testes com o arquivo "{}" concluídos.'.format(arq))
+    print('tests with "{}" file completed'.format(arq))
     return tester.get_reports()
 
 # Usage Example with ee.py in source code.
