@@ -14,7 +14,7 @@ class Tester:
         self.tests = ""
         self.errors = ""
 
-    def run_tests(self, limit=None):
+    def run_tests(self):
 
 
         for case in self.testCases:
