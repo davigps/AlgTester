@@ -14,7 +14,8 @@ class Tester:
         self.tests = ""
         self.errors = ""
 
-    def run_tests(self):
+    def run_tests(self, limit=None):
+
 
         for case in self.testCases:
 
@@ -49,14 +50,16 @@ class Tester:
 
         return self.result
 
-    def get_report(self):
+    def get_reports(self):
 
+        self.tests = ''
         for i in range(len(self.result["tests"])):
             test = self.result["tests"][i]
             self.tests += '### TEST {} ###\n=-= Input:\n{}=-= Output:\n{}\n'.format(
                     i + 1, test["input"], test["output"]
                     )
 
+        self.errors = ''
         for i in range(len(self.result["errors"])):
             error = self.result["errors"][i]
             self.errors += '### ERROR {} ###\n=-= Input:\n{}=-= Output:\n{}\n'.format(
@@ -65,8 +68,8 @@ class Tester:
 
         return (self.tests, self.errors)
 
-    def save_report(self):
-        tests, errors = self.get_report()
+    def save_reports(self):
+        tests, errors = self.get_reports()
 
         with open('tests.txt', 'w') as arq:
             arq.write(tests)
@@ -76,6 +79,15 @@ class Tester:
     def print_reports(self):
         print(self.tests)
         print(self.errors)
+
+# You can use this function to make a regular test,
+# with some test cases...
+def test(arq, cases):
+    tester = Tester(arq, cases)
+    tester.run_tests()
+    tester.save_reports()
+    print('Testes com o arquivo "{}" concluídos.'.format(arq))
+    return tester.get_reports()
 
 # Usage Example with ee.py in source code.
 if __name__ == "__main__":
