@@ -16,7 +16,6 @@ class Tester:
 
     def run_tests(self):
 
-
         for case in self.testCases:
 
             tempOut = open('temp_out.txt', 'w')
