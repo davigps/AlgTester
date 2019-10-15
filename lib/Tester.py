@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class Tester:
+class InputTester:
 
     def __init__(self, arq, testCases):
         self.arq = arq
@@ -11,10 +11,11 @@ class Tester:
                 "tests": [],
                 "errors": []
                 }
-        self.tests = ""
-        self.errors = ""
+        self.testsText = ""
+        self.errorsText = ""
 
-    def run_tests(self, limit=None):
+    # Run the tests in self.testCases and save it in self.result
+    def run_tests(self):
 
 
         for case in self.testCases:
@@ -50,24 +51,26 @@ class Tester:
 
         return self.result
 
+    # Get the reports texts and save it on self.testsText and self.errorsText
     def get_reports(self):
 
-        self.tests = ''
+        self.testsText = ''
         for i in range(len(self.result["tests"])):
             test = self.result["tests"][i]
-            self.tests += '### TEST {} ###\n=-= Input:\n{}=-= Output:\n{}\n'.format(
+            self.testsText += '### TEST {} ###\n=-= Input:\n{}=-= Output:\n{}\n'.format(
                     i + 1, test["input"], test["output"]
                     )
 
-        self.errors = ''
+        self.errorsText = ''
         for i in range(len(self.result["errors"])):
             error = self.result["errors"][i]
-            self.errors += '### ERROR {} ###\n=-= Input:\n{}=-= Output:\n{}\n'.format(
+            self.errorsText += '### ERROR {} ###\n=-= Input:\n{}=-= Output:\n{}\n'.format(
                     i + 1, error["input"], error["output"]
                     )
 
-        return (self.tests, self.errors)
+        return (self.testsText, self.errorsText)
 
+    # Save the reports texts in .txt files
     def save_reports(self):
         tests, errors = self.get_reports()
 
@@ -76,36 +79,24 @@ class Tester:
         with open('errors.txt', 'w') as arq:
             arq.write(errors)
 
-    def print_reports(self):
-        print(self.tests)
-        print(self.errors)
+    # Get an array with the tests
+    def get_tests(self):
+        return self.result['tests']
 
-# You can use this function to make a regular test,
+    # Get an array with the errors
+    def get_errors(self):
+        return self.result['errors']
+
+    # Print the reports texts
+    def print_reports(self):
+        print(self.testsText)
+        print(self.errorsText)
+
+# You can import this function to make a regular test,
 # with some test cases...
 def test(arq, cases):
-    tester = Tester(arq, cases)
+    tester = InputTester(arq, cases)
     tester.run_tests()
     tester.save_reports()
     print('tests with "{}" file completed'.format(arq))
-    return tester.get_reports()
-
-# Usage Example with ee.py in source code.
-if __name__ == "__main__":
-    # Two successful tests and one failed test
-    testCases = [
-            'jose vermelho\nfim\n',
-            'clara amarelo\ndavi laranja\ngabriel amarelo\nfim\n',
-            'maria azul\nfirmino\nfim\n'
-            ]
-
-    # Create the Tester Object
-    hospTester = Tester('hospital.py', testCases)
-
-    # Run tests and save in attributes like "errors" or "tests"
-    hospTester.run_tests()
-
-    # Get and save result attributes in .txt files
-    hospTester.save_report()
-
-    # Print the result attributes
-    hospTester.print_reports()
+    return (tester.get_tests(), tester.get_errors())
