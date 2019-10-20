@@ -15,7 +15,7 @@
 ---
 
 <p align="center"> 
-    pyInputTester allows you (or should) to generate input tests cases and save tests reports of a another python program.
+    pyInputTester allows you to generate input tests cases and save tests reports of a another python program.
     <br> 
 </p>
 
