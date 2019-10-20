@@ -19,7 +19,7 @@ class GeneratorInput:
                 input_[1] = input_[1].split('<>')
 
             elif input_[0].lower() == 'str':
-                input_[2] = input_[2].split('..')
+                input_[2] = input_[2].split('...')
        
         for input_ in self.inputs:
 
