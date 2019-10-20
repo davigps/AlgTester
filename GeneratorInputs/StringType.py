@@ -4,9 +4,9 @@ class StringType:
     
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z']
     
-    def __init__(self, length, init_caracter, final_caracter):
-        self.init = self.index_caracter(init_caracter)
-        self.final = self.index_caracter(final_caracter)
+    def __init__(self, length, init_charecter, final_charecter):
+        self.init = self.index_charecter(init_charecter)
+        self.final = self.index_charecter(final_charecter)
         self.length = length
 
     def getString(self):
@@ -16,10 +16,10 @@ class StringType:
 
         return string
         
-    def index_caracter(self, caracter):
+    def index_charecter(self, charecter):
         
         for char in self.alphabet:
-            if caracter.lower() == char:
+            if charecter.lower() == char:
                 return self.alphabet.index(char)
 
         return 'Error'

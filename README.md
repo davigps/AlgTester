@@ -1,46 +1,52 @@
-# Project Title
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="./assets/images/logo.png" alt="Project logo"></a>
+</p>
 
-## Table of Contents
+<h3 align="center">pyInputTester (Under development)</h3>
+
+<div align="center">
+
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+
+</div>
+
+---
+
+<p align="center"> 
+    pyInputTester allows you (or should) to generate input tests cases and save tests reports of a another python program.
+    <br> 
+</p>
+
+## 📝 Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
 - [Contributing](../CONTRIBUTING.md)
+- [Contributors](#contributors)
 
-## About <a name = "about"></a>
+## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+- To do.
 
-## Getting Started <a name = "getting_started"></a>
+## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+- To do.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
+- To do.
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
+- To do.
 
-Say what the step will be
+## 🎈 Usage <a name="usage"></a>
 
-```
-Give the example
-```
+- To do.
 
-And repeat
+## ✍️ Contributors <a name = "contributors"></a>
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## Usage <a name = "usage"></a>
-
-Add notes about how to use the system.
+- [Arthur Stevam](arthurstevam98)
