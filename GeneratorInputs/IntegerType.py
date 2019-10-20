@@ -1,7 +1,3 @@
-#Campina Grande - PB
-#Class IntegerType
-#coding: utf-8
-
 import random
 
 class IntegerType:

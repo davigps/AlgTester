@@ -1,7 +1,3 @@
-#Campina Grande -PB
-#Class StringType
-#coding: utf-8
-
 import random
 
 class StringType:

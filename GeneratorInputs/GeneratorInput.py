@@ -5,7 +5,7 @@ from FloatType import FloatType
 
 class GeneratorInput:
     inputs = []    
-    def __init__(self, inputs):
+    def __init__(self, inputs = []):
         self.file = open('.test', 'r').readlines()
         self.inputscreated = inputs
 

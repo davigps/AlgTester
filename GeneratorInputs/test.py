@@ -1,7 +1,3 @@
-#Arthur Stevam 
-#UFCG - Ciências da Computação - 2019.2
-#
-
 from GeneratorInput import GeneratorInput
 
 inputs = []

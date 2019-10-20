@@ -1,7 +1,3 @@
-#Campina Grande - PB
-#Class FloatType
-#coding: utf-8
-
 import random
 
 class FloatType:

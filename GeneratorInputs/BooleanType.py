@@ -1,7 +1,3 @@
-#Campina Grande - PB
-#Class BooleanType
-#coding: utf-8
-
 class BooleanType:
 
     def __init__(self):
