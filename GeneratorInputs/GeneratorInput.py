@@ -4,10 +4,11 @@ from BooleanType import BooleanType
 from FloatType import FloatType
 
 class GeneratorInput:
-    inputs = []    
-    def __init__(self, inputs = []):
-        self.file = open('.test', 'r').readlines()
-        self.inputscreated = inputs
+    inputs = []
+
+    def __init__(self, filename='.test', initial_inputs = []):
+        self.file = open(filename, 'r').readlines()
+        self.inputs_created = initial_inputs
 
     def generate_inputs(self):
         for line in self.file:
@@ -31,5 +32,6 @@ class GeneratorInput:
             elif input_[0].lower() == 'str':
                 variable = StringType(int(input_[1]), input_[2][0], input_[2][1]).getString()
                 
-            self.inputscreated.append(variable)
+            self.inputs_created.append(variable)
+        return self.inputs_created
 

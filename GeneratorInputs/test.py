@@ -1,9 +1,7 @@
 from GeneratorInput import GeneratorInput
 
-inputs = []
+gerador = GeneratorInput()
 
-gerador = GeneratorInput(inputs)
-
-gerador.generate_inputs()
+inputs = gerador.generate_inputs()
 
 print(inputs)
