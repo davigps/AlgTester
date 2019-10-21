@@ -1,10 +1,10 @@
 import sys
-sys.path.append("..")
+sys.path.append('../')
 
-from lib.Tester import InputTester
+from pyInputTester.tools import Tester
 from random import randint, choice
 
-
+# You can automatically generate all tests cases, with the GeneratorInput Class.
 cases = []
 for i in range(randint(10,30)):
     a = randint(-999, 999)
@@ -18,7 +18,7 @@ for i in range(randint(10,30)):
     cases.append(case)
 
 # Testing the example1.py with the generated cases...
-tester = InputTester('example1.py', cases)
+tester = Tester('example1.py', cases)
 
 # Run the tests cases
 tester.run_tests()

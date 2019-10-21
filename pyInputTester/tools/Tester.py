@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class InputTester:
+class Tester:
 
     def __init__(self, arq, testCases):
         self.arq = arq
@@ -95,7 +95,7 @@ class InputTester:
 # You can import this function to make a regular test,
 # with some test cases...
 def test(arq, cases):
-    tester = InputTester(arq, cases)
+    tester = Tester(arq, cases)
     tester.run_tests()
     tester.save_reports()
     print('tests with "{}" file completed'.format(arq))

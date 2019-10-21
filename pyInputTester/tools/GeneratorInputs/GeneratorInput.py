@@ -1,14 +1,11 @@
-from StringType import StringType
-from IntegerType import IntegerType
-from BooleanType import BooleanType
-from FloatType import FloatType
+from pyInputTester.tools.GeneratorInputs.Types import *
 
 class GeneratorInput:
     inputs = []
 
-    def __init__(self, filename='.test', initial_inputs = []):
+    def __init__(self, number_of_cases, filename='.test'):
         self.file = open(filename, 'r').readlines()
-        self.inputs_created = initial_inputs
+        self.inputs_created = []
 
     def generate_inputs(self):
         for line in self.file:
