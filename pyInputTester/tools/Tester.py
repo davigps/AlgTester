@@ -94,9 +94,9 @@ class Tester:
 
 # You can import this function to make a regular test,
 # with some test cases...
-def test(arq, cases):
-    tester = Tester(arq, cases)
+def test(target_filename, cases):
+    tester = Tester(target_filename, cases)
     tester.run_tests()
     tester.save_reports()
-    print('tests with "{}" file completed'.format(arq))
+    print('tests with "{}" file completed'.format(target_filename))
     return (tester.get_tests(), tester.get_errors())
