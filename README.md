@@ -49,4 +49,4 @@
 
 ## ✍️ Contributors <a name = "contributors"></a>
 
-- [Arthur Stevam](arthurstevam98)
+- [Arthur Stevam](https://www.github.com/arthurstevam98)
