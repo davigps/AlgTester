@@ -11,8 +11,10 @@ for i in range(randint(10,30)):
     b = randint(-999, 999)
 
     # Generating bugs
-    if a % 5 == 0:
+    if a % 7 == 0:
         a = choice('abfmsefnefn')
+    if b % 8 == 0:
+        b = choice('abcdefghijk')
 
     case = '{} {}\n'.format(a, b)
     cases.append(case)
