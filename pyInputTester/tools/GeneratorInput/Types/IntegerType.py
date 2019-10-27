@@ -6,6 +6,6 @@ class IntegerType:
         self.maximum = maximum
         self.minimum = minimum
 
-    def getInteger(self):
+    def get_integer(self):
         integer = random.randint(self.minimum, self.maximum)
         return integer

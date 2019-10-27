@@ -1,0 +1,8 @@
+$lista = [davi, joao, maria, jose, joaquim]
+$idade = 12
+$nome = Alerquina
+
+input:
+meu nome é $lista
+tenho a idade $idade
+o nome dela é $nome

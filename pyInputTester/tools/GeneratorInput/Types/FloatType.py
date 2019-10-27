@@ -7,7 +7,7 @@ class FloatType:
         self.maximum = maximum
         self.decimal = decimal
 
-    def getFloat(self):
+    def get_float(self):
         while True:
             float_ = (random.random()) * self.maximum
             if float_ >= self.minimum: break
