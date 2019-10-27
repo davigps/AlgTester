@@ -25,6 +25,7 @@
 - [Getting Started](#getting_started)
 - [Usage](#usage)
 - [Contributing](../CONTRIBUTING.md)
+- [Authors](#authors)
 - [Contributors](#contributors)
 
 ## 🧐 About <a name = "about"></a>
@@ -47,6 +48,9 @@
 
 - To do.
 
-## ✍️ Contributors <a name = "contributors"></a>
+## ✍️ Authors <a name = "authors"></a>
 
-- [Arthur Stevam](https://www.github.com/arthurstevam98)
+- [Davi Sousa](https://www.github.com/davig-sousa) (Initial Idea & Initial Work)
+- [Arthur Stevam](https://www.github.com/arthurstevam98) (Initial Work)
+
+## Contributors <a name = "contributors"></a>

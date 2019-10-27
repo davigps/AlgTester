@@ -1,4 +1,4 @@
-from pyInputTester.tools.GeneratorInput.__statements import *
+from pyInputTester.tools.GeneratorInput.__statements import get_attrib, get_bool, get_float, get_int, get_str, get_variable, read_for, read_while
 
 class GeneratorInput:
     inputs = []
@@ -37,7 +37,7 @@ class GeneratorInput:
 
     def generate_inputs(self):
         self.search_variables()
-        print(self.variables)
+        return self.inputs_created
         # for line in self._file:
         #     self.inputs.append(line.split())
         

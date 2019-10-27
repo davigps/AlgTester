@@ -1,2 +1,2 @@
-from .Tester import Tester, test
-from .GeneratorInput import *
+from .Tester.Tester import Tester, test
+from .GeneratorInput.GeneratorInput import GeneratorInput
