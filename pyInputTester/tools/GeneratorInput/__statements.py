@@ -1,5 +1,8 @@
 from pyInputTester.tools.GeneratorInput.Types import *
 
+def __split(string):
+    pass
+
 def get_int(line):
     pass
 
@@ -22,7 +25,7 @@ def get_attrib(line, is_dereference=False):
         if value[0] == '[' and value[len(value)-1] == ']':
             value = value.strip('[]')
             value = [element.strip() for element in value.split(',')]
-        
+
         return (name, value)
 
 def get_variable(line):

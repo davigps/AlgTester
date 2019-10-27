@@ -1,6 +1,7 @@
 from pyInputTester.tools.GeneratorInput.__statements import get_attrib, get_bool, get_float, get_int, get_str, get_variable, read_for, read_while
 
 class GeneratorInput:
+
     inputs = []
 
     def __init__(self, number_of_cases, path_to_file='.test'):
@@ -40,6 +41,7 @@ class GeneratorInput:
         self.search_variables()
 
         for case in range(self.number_of_cases):
+            case = ''
             is_input = False
             for line in self.__file:
                 line = line.strip()
@@ -47,7 +49,10 @@ class GeneratorInput:
                     is_input = True
                 elif is_input:
                     keys = self.__get_statements(line)
-                    
+                    for key in keys:
+                        value = self.__statements[key](line)
+
+
 
 
         return self.inputs_created
