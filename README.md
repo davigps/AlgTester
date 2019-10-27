@@ -53,4 +53,4 @@
 - [Davi Sousa](https://www.github.com/davig-sousa) (Initial Idea & Initial Work)
 - [Arthur Stevam](https://www.github.com/arthurstevam98) (Initial Work)
 
-## Contributors <a name = "contributors"></a>
+## ✌ Contributors <a name = "contributors"></a>
