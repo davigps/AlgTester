@@ -56,8 +56,7 @@ class GeneratorInput:
                     for key in keys:
                         line = self.__statements[key](line)
                 line += '\n'
-
-
-
+                case += line
+            self.inputs_created.append(case)
 
         return self.inputs_created
