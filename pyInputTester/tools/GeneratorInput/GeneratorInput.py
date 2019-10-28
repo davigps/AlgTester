@@ -34,7 +34,7 @@ class GeneratorInput:
             if line == 'input:': return None
             keys = self.__get_statements(line)
             if len(keys) == 1 and keys[0] == '$':
-                name, value = self.__statements['$'](line)
+                name, value = self.__statements['$'](line, is_attribution=True)
                 self.variables[name] = value
 
     def generate_inputs(self):
@@ -43,14 +43,19 @@ class GeneratorInput:
         for case in range(self.number_of_cases):
             case = ''
             is_input = False
+
+
             for line in self.__file:
                 line = line.strip()
                 if line == 'input:':
                     is_input = True
-                elif is_input:
+                    continue
+                
+                if is_input:
                     keys = self.__get_statements(line)
                     for key in keys:
-                        value = self.__statements[key](line)
+                        line = self.__statements[key](line)
+                line += '\n'
 
 
 

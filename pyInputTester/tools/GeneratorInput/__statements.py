@@ -15,8 +15,8 @@ def get_float(line):
 def get_bool(line):
     pass
 
-def get_attrib(line, is_dereference=False):
-    if is_dereference:
+def get_attrib(line, is_attribution=False):
+    if not is_attribution:
         return get_variable(line)
     else:
         line = line.split('$')[1]
