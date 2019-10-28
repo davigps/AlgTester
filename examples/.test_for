@@ -1,0 +1,8 @@
+$nomes = [Davi, Arthur, Joaquina, Manoel]
+$times = int(1<>50)
+
+input:
+$times
+for($times) {
+O nome da vez é $nomes
+}

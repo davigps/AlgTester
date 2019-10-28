@@ -37,26 +37,43 @@ class GeneratorInput:
                 name, value = self.__statements['$'](line, is_attribution=True)
                 self.variables[name] = value
 
+    def __get_input_declaration(self):
+        
+        class Input_Declaration:
+
+            def __init__(self, file):
+                self.repeat_times = 1
+                self.lines = []
+            
+            def __read_input_declaration(self, file):
+                pass
+        
+        return Input_Declaration(self.__file)
+
+    def __read_lines(self, lines, read_times):
+        case = ''
+        for time in range(read_times):
+            for line in lines:
+                line = line.strip()
+                
+                keys = self.__get_statements(line)
+                for key in keys:
+                    line = self.__statements[key](line)
+                    
+                line += '\n'
+            case += line
+        return case
+
     def generate_inputs(self):
         self.search_variables()
 
         for case in range(self.number_of_cases):
             case = ''
-            is_input = False
 
+            input_declaration = self.__get_input_declaration()
 
-            for line in self.__file:
-                line = line.strip()
-                if line == 'input:':
-                    is_input = True
-                    continue
-                
-                if is_input:
-                    keys = self.__get_statements(line)
-                    for key in keys:
-                        line = self.__statements[key](line)
-                line += '\n'
-                case += line
+            case += self.__read_lines(input_declaration, 1)
+            
             self.inputs_created.append(case)
 
         return self.inputs_created

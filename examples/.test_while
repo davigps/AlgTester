@@ -1,0 +1,6 @@
+$cores = [amarelo, azul, verde, vermelho, laranja]
+
+input:
+whilenot(fim) {
+$cores int(-200<>200)
+}
