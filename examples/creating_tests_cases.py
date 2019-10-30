@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')
 
-from pyInputTester.tools import GeneratorInput
+from pyInputTester.tools.GeneratorInput import GeneratorInput
 
 # If you don't set the input test configuration file name, '.test' file will be set.
 # The first argument is the number of random tests cases.

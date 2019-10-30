@@ -1,4 +1,4 @@
-from pyInputTester.tools.statements import *
+from pyInputTester.tools.__statements__ import *
 
 class GeneratorInput:
 

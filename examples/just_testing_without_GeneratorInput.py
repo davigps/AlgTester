@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')
 
-from pyInputTester.tools import Tester
+from pyInputTester.tools.Tester import Tester
 from random import randint, choice
 
 # You can automatically generate all tests cases, with the GeneratorInput Class.
