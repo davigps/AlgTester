@@ -1,4 +1,5 @@
-from Types import *
+from pyInputTester.tools.Types import *
+# from Types import *
 
 def __split(string, line):
     att = ''
@@ -58,7 +59,7 @@ def get_attrib(line, is_attribution=False):
         line = line.split('$')[1]
         name, value = [term.strip() for term in line.split('=')]
 
-
+        
 
         if value[0] == '[' and value[len(value)-1] == ']':
             value = value.strip('[]')

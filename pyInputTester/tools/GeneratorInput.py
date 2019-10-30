@@ -1,4 +1,4 @@
-from pyInputTester.tools.GeneratorInput.__statements import get_attrib, get_bool, get_float, get_int, get_str, get_variable, read_for, read_while
+from pyInputTester.tools.statements import *
 
 class GeneratorInput:
 
@@ -7,7 +7,6 @@ class GeneratorInput:
     def __init__(self, number_of_cases, path_to_file='.test'):
         self.number_of_cases = number_of_cases
         self.__file = open(path_to_file, 'r').readlines()
-        self.inputs_created = []
 
         self.__key_words = [
             '$', 'while not ', 'for ',
@@ -20,6 +19,7 @@ class GeneratorInput:
         }
 
         self.variables = {}
+        self.inputs_created = []
 
     def __get_statements(self, line):
         keys = []
