@@ -41,16 +41,6 @@ class GeneratorInput:
 
                 self.variables[name] = value
 
-    def __get_variable(self, line):
-        name = line.split('$')[1].split(' ')[0]
-        return line.replace('$' + name, self.variables[name])
-
-    def __resolve_for(self, lines):
-        return lines
-
-    def __resolve_while(self, lines):
-        return lines
-
     def __read_lines(self, lines):
         case = ''
         for line in lines:
