@@ -9,13 +9,12 @@ class GeneratorInput:
         self.__file = open(path_to_file, 'r').readlines()
 
         self.__key_words = [
-            '$', 'while not ', 'for ',
-            'int(', 'float(', 'bool()', 'str('
+            'int(', 'float(', 
+            'bool()', 'str('
         ]
         self.__statements = {
-            'int(': get_int, 'float(': get_float, 'bool(': get_bool,
-            'str(': get_str, '$': get_attrib, 'for ': read_for,
-            'while not ': read_while
+            'int(': get_int, 'float(': get_float, 
+            'bool(': get_bool, 'str(': get_str
         }
 
         self.variables = {}
@@ -34,7 +33,7 @@ class GeneratorInput:
             if line == 'input:': return None
             keys = self.__get_statements(line)
             if len(keys) == 1 and keys[0] == '$':
-                name, value = self.__statements['$'](line, is_attribution=True)
+                name, value = get_attrib(line)
 
                 keys = self.__get_statements(value)
                 for key in keys:
@@ -42,43 +41,40 @@ class GeneratorInput:
 
                 self.variables[name] = value
 
-    def __get_input_declaration(self):
-        
-        class Input_Declaration:
+    def __get_variable(self, line):
+        name = line.split('$')[1].split(' ')[0]
+        return line.replace('$' + name, self.variables[name])
 
-            def __init__(self, file):
-                self.repeat_times = 1
-                self.lines = []
-            
-            def __read_input_declaration(self, file):
-                pass
-        
-        return Input_Declaration(self.__file)
+    def __resolve_for(self, lines):
+        return lines
 
-    def __read_lines(self, lines, read_times):
+    def __resolve_while(self, lines):
+        return lines
+
+    def __read_lines(self, lines):
         case = ''
-        for time in range(read_times):
-            for line in lines:
-                line = line.strip()
+        for line in lines:
+            line = line.strip()
+            
+            keys = self.__get_statements(line)
+            for key in keys:
+                line = self.__statements[key](line)
                 
-                keys = self.__get_statements(line)
-                for key in keys:
-                    line = self.__statements[key](line)
-                    
-                line += '\n'
-            case += line
+            line += '\n'
+        case += line
         return case
 
     def generate_inputs(self):
-        self.search_variables()
 
         for case in range(self.number_of_cases):
-            case = ''
+            lines = self.__get_input_lines()
 
-            input_declaration = self.__get_input_declaration()
+            self.search_variables()
+            lines = self.__resolve_variables(lines)
+            lines = self.__resolve_for(lines)
+            lines = self.__resolve_while(lines)
 
-            case += self.__read_lines(input_declaration, 1)
-            
+            case = self.__read_lines(self.__file)
             self.inputs_created.append(case)
 
         return self.inputs_created

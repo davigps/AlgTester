@@ -52,29 +52,15 @@ def get_float(line):
 def get_bool(line):
     pass
 
-def get_attrib(line, is_attribution=False):
-    if not is_attribution:
-        return get_variable(line)
-    else:
-        line = line.split('$')[1]
-        name, value = [term.strip() for term in line.split('=')]
+def get_attrib(line):
+    line = line.split('$')[1]
+    name, value = [term.strip() for term in line.split('=')]
 
-        
+    if value[0] == '[' and value[len(value)-1] == ']':
+        value = value.strip('[]')
+        value = [element.strip() for element in value.split(',')]
 
-        if value[0] == '[' and value[len(value)-1] == ']':
-            value = value.strip('[]')
-            value = [element.strip() for element in value.split(',')]
-
-        return (name, value)
-
-def get_variable(line):
-    pass
-
-def read_for(line):
-    pass
-
-def read_while(line):
-    pass
+    return (name, value)
 
 if __name__ == "__main__":
     line = 'str(4, a...e) int(0<>100) str(10, a...b) float() str(3, a...b) int(5<>10)'
