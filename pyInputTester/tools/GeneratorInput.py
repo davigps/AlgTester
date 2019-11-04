@@ -35,6 +35,11 @@ class GeneratorInput:
             keys = self.__get_statements(line)
             if len(keys) == 1 and keys[0] == '$':
                 name, value = self.__statements['$'](line, is_attribution=True)
+
+                keys = self.__get_statements(value)
+                for key in keys:
+                    value = self.__statements[key](value)
+
                 self.variables[name] = value
 
     def __get_input_declaration(self):
