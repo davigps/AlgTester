@@ -1,8 +1,7 @@
 from pyInputTester.tools.__statements__ import *
+from random import choice
 
 class GeneratorInput:
-
-    inputs = []
 
     def __init__(self, number_of_cases, path_to_file='.test'):
         self.number_of_cases = number_of_cases
@@ -54,6 +53,73 @@ class GeneratorInput:
         case += line
         return case
 
+    def __get_input_lines(self):
+        input_lines = []
+        declaration = False
+        for line in self.__file:
+            if declaration:
+                input_lines.append(line)
+            elif line.strip() == 'input:':
+                declaration = True
+        return input_lines
+
+    def __resolve_variables(self, lines):
+        lines = lines[:]
+        
+        for name in self.variables.keys():
+
+            value = self.variables[name]
+
+            if type(value) == list:
+                value = choice(value)
+
+            for i in range(len(lines)):
+                lines[i] = lines[i].replace(name, str(value))
+
+        return lines
+
+    def __get_scope(self, scope, lines):
+        start = None
+        for i in range(len(lines)):
+            if scope in lines[i]:
+                start = i
+                break
+        
+        declaration_line = lines[start]
+        param = declaration_line.split(scope)[1].split(')')[0]
+
+        i = start + 1
+        scope_lines = []
+        while lines[i].strip() != '}':
+            scope_lines.append(lines[i])
+            i += 1
+        return {
+            "start": start,
+            "end": i,
+            "scope": scope_lines,
+            "param": param
+        }
+
+    def __scope_exists(self, scope, lines):
+        for line in lines:
+            if scope in line:
+                return True
+        return False
+
+    def __resolve_for(self, lines):
+        lines = lines[:]
+        
+        while self.__scope_exists('for(', lines):
+            for_scope = self.__get_scope('for(', lines)
+            # To do
+
+        return lines
+    
+    def __resolve_while(self, lines):
+        lines = lines[:]
+        # To do
+        return lines
+
     def generate_inputs(self):
 
         for case in range(self.number_of_cases):
@@ -64,7 +130,7 @@ class GeneratorInput:
             lines = self.__resolve_for(lines)
             lines = self.__resolve_while(lines)
 
-            case = self.__read_lines(self.__file)
+            case = self.__read_lines(lines)
             self.inputs_created.append(case)
 
         return self.inputs_created
