@@ -1,0 +1,11 @@
+$lista = [davi, joaquim, amarildo, escravisaura]
+$vez = int(1<>2)
+
+input:
+primeiro $vez:
+for($vez) {
+segundo:
+for($vez) {
+int(-90<>1) $lista
+}
+}

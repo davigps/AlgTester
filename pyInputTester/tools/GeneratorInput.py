@@ -3,9 +3,9 @@ from random import choice
 
 class GeneratorInput:
 
-    def __init__(self, number_of_cases, path_to_file='.test'):
+    def __init__(self, number_of_cases, test_file):
         self.number_of_cases = number_of_cases
-        self.__file = open(path_to_file, 'r').readlines()
+        self.__file = open(test_file, 'r').readlines()
 
         self.__key_words = [
             '$', 'int(', 'float(', 
@@ -42,17 +42,17 @@ class GeneratorInput:
                 self.variables[name] = value
 
     def __read_lines(self, lines):
-        case = ''
-        for line in lines:
-            line = line.strip()
+        lines = lines[:]
+
+        for i in range(len(lines)):
+            line = lines[i]
             
             keys = self.__get_statements(line)
             for key in keys:
-                line += self.__statements[key](line)
+                line = self.__statements[key](line)
                 
-            line += '\n'
-        case += line
-        return case
+            lines[i] = line
+        return lines
 
     def __get_input_lines(self):
         input_lines = []
@@ -67,15 +67,16 @@ class GeneratorInput:
     def __resolve_variables(self, lines):
         lines = lines[:]
         
-        for name in self.variables.keys():
+        for i in range(len(lines)):
+            for name in self.variables.keys():
+                value = self.variables[name]
 
-            value = self.variables[name]
+                if type(value) == list:
+                    value = choice(value)
+                
+                lines[i] = lines[i].replace('$' + name, value)
 
-            if type(value) == list:
-                value = choice(value)
-
-            for i in range(len(lines)):
-                lines[i] = lines[i].replace('$' + name, str(value))
+            
 
         return lines
 
@@ -96,15 +97,16 @@ class GeneratorInput:
         stack = [True]
 
         while len(stack) > 0:
+            if '{' in lines[i]: stack.append(True)
             if lines[i].strip() == '}': stack.pop()
-            else:
-                if '{' in lines[i]: stack.append(True)
 
-                scope_lines.append(lines[i])
-                i += 1
+            scope_lines.append(lines[i])
+            i += 1
+        scope_lines.pop()
+
         return {
             "start": start,
-            "end": i,
+            "end": i -1,
             "scope": scope_lines,
             "param": param
         }
@@ -139,8 +141,8 @@ class GeneratorInput:
             for i in range(len(while_scope["scope"]) + 2):
                 lines.pop(while_scope["start"])
             
-            lines.insert(while_scope["start"], while_scope["param"])
-            while choice([False, True, True, True]):
+            lines.insert(while_scope["start"], while_scope["param"] + '\n')
+            while choice([False, True, True, True, True]):
                 for j in range(len(while_scope["scope"]) - 1, -1, -1):
                     lines.insert(while_scope["start"], while_scope["scope"][j])
 
@@ -150,19 +152,16 @@ class GeneratorInput:
 
         for case in range(self.number_of_cases):
             lines = self.__get_input_lines()
-            print(lines)
-            print()
 
             self.search_variables()
             lines = self.__resolve_for(lines)
-            print(lines)
-            print()
             lines = self.__resolve_while(lines)
             lines = self.__resolve_variables(lines)
-            print(lines)
-            print()
+            lines = self.__read_lines(lines)
 
-            case = self.__read_lines(lines)
+            case = ''
+            for line in lines:
+                case += line
             self.inputs_created.append(case)
 
         return self.inputs_created
