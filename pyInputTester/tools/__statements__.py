@@ -62,6 +62,9 @@ def get_attrib(line):
 
     return (name, value)
 
+def get_seq(line):
+    pass
+
 if __name__ == "__main__":
     line = 'str(4, a...e) int(0<>100) str(10, a...b) float() str(3, a...b) int(5<>10)'
     line = get_str(line)
