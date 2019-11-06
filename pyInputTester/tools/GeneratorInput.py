@@ -90,9 +90,16 @@ class GeneratorInput:
 
         i = start + 1
         scope_lines = []
-        while lines[i].strip() != '}':
-            scope_lines.append(lines[i])
-            i += 1
+
+        stack = [True]
+
+        while len(stack) > 0:
+            if lines[i].strip() == '}': stack.pop()
+            else:
+                if '{' in lines[i]: stack.append(True)
+
+                scope_lines.append(lines[i])
+                i += 1
         return {
             "start": start,
             "end": i,
@@ -111,13 +118,23 @@ class GeneratorInput:
         
         while self.__scope_exists('for(', lines):
             for_scope = self.__get_scope('for(', lines)
-            # To do
+            
+            for i in range(len(for_scope["scope"])):
+                lines.pop(for_scope["start"])
+            
+            for i in range(int(for_scope["param"])):
+                for j in range(len(for_scope["scope"]) - 1, -1, -1):
+                    lines.insert(for_scope["start"], for_scope["scope"][j])
 
         return lines
     
     def __resolve_while(self, lines):
         lines = lines[:]
-        # To do
+        
+        while self.__scope_exists('whilenot(', lines):
+            while_scope = self.__get_scope('whilenot(', lines)
+            # To do
+
         return lines
 
     def generate_inputs(self):
