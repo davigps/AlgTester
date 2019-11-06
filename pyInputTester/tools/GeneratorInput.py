@@ -8,7 +8,7 @@ class GeneratorInput:
         self.__file = open(path_to_file, 'r').readlines()
 
         self.__key_words = [
-            'int(', 'float(', 
+            '$', 'int(', 'float(', 
             'bool()', 'str('
         ]
         self.__statements = {
@@ -30,8 +30,9 @@ class GeneratorInput:
         for line in self.__file:
             line = line.strip()
             if line == 'input:': return None
+
             keys = self.__get_statements(line)
-            if len(keys) == 1 and keys[0] == '$':
+            if len(keys) != 0 and keys[0] == '$':
                 name, value = get_attrib(line)
 
                 keys = self.__get_statements(value)
@@ -47,7 +48,7 @@ class GeneratorInput:
             
             keys = self.__get_statements(line)
             for key in keys:
-                line = self.__statements[key](line)
+                line += self.__statements[key](line)
                 
             line += '\n'
         case += line
@@ -74,7 +75,7 @@ class GeneratorInput:
                 value = choice(value)
 
             for i in range(len(lines)):
-                lines[i] = lines[i].replace(name, str(value))
+                lines[i] = lines[i].replace('$' + name, str(value))
 
         return lines
 
@@ -87,6 +88,7 @@ class GeneratorInput:
         
         declaration_line = lines[start]
         param = declaration_line.split(scope)[1].split(')')[0]
+        param = self.__resolve_variables([param])[0]
 
         i = start + 1
         scope_lines = []
@@ -119,7 +121,7 @@ class GeneratorInput:
         while self.__scope_exists('for(', lines):
             for_scope = self.__get_scope('for(', lines)
             
-            for i in range(len(for_scope["scope"])):
+            for i in range(len(for_scope["scope"]) + 2):
                 lines.pop(for_scope["start"])
             
             for i in range(int(for_scope["param"])):
@@ -133,7 +135,14 @@ class GeneratorInput:
         
         while self.__scope_exists('whilenot(', lines):
             while_scope = self.__get_scope('whilenot(', lines)
-            # To do
+            
+            for i in range(len(while_scope["scope"]) + 2):
+                lines.pop(while_scope["start"])
+            
+            lines.insert(while_scope["start"], while_scope["param"])
+            while choice([False, True, True, True]):
+                for j in range(len(while_scope["scope"]) - 1, -1, -1):
+                    lines.insert(while_scope["start"], while_scope["scope"][j])
 
         return lines
 
@@ -141,11 +150,17 @@ class GeneratorInput:
 
         for case in range(self.number_of_cases):
             lines = self.__get_input_lines()
+            print(lines)
+            print()
 
             self.search_variables()
-            lines = self.__resolve_variables(lines)
             lines = self.__resolve_for(lines)
+            print(lines)
+            print()
             lines = self.__resolve_while(lines)
+            lines = self.__resolve_variables(lines)
+            print(lines)
+            print()
 
             case = self.__read_lines(lines)
             self.inputs_created.append(case)
