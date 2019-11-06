@@ -1,5 +1,5 @@
 $nomes = [Davi, Arthur, Joaquina, Manoel]
-$times = int(1<>50)
+$times = int(1<>5)
 
 input:
 $times
