@@ -1,5 +1,5 @@
-from pyInputTester.tools.Types import *
-# from Types import *
+# from pyInputTester.tools.Types import *
+from Types import *
 
 def __split(string, line):
     att = ''
@@ -63,6 +63,7 @@ def get_attrib(line):
     return (name, value)
 
 def get_seq(line):
+    # To do
     pass
 
 if __name__ == "__main__":
