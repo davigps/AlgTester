@@ -1,4 +1,7 @@
+$lista = [stevam, davi]
+
 input:
+$lista
 int(0<>10)
 float(0<>5, 2)
 bool()

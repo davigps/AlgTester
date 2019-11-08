@@ -21,7 +21,7 @@ class GeneratorInput:
 
         self.__statements = {
             'int(': get_int, 'float(': get_float, 
-            'bool(': get_bool, 'str(': get_str,
+            'bool()': get_bool, 'str(': get_str,
             'seq(': get_seq
         }
 
@@ -81,11 +81,9 @@ class GeneratorInput:
                 value = self.variables[name]
 
                 if type(value) == list:
-                    value = choice(value)
+                    value = choice(value) 
                 
                 lines[i] = lines[i].replace('$' + name, value)
-
-            
 
         return lines
 
@@ -171,6 +169,6 @@ class GeneratorInput:
             case = ''
             for line in lines:
                 case += line
-            self.inputs_created.append(case)
+            self.inputs_created.append(case + '\n')
 
         return self.inputs_created
