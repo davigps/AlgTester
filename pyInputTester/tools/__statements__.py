@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from pyInputTester.tools.Types import *
 #from Types import *
+=======
+# from pyInputTester.tools.Types import *
+from Types import *
+>>>>>>> 84772880441058b1dbf2209a38b791dc6828744f
 
 def __split(string, line):
     att = ''
@@ -71,21 +76,21 @@ def get_bool(line):
 
     return line
 
-def get_attrib(line, is_attribution=False):
-    if not is_attribution:
-        return get_variable(line)
-    else:
-        line = line.split('$')[1]
-        name, value = [term.strip() for term in line.split('=')]
+def get_attrib(line):
+    line = line.split('$')[1]
+    name, value = [term.strip() for term in line.split('=')]
 
-        
+    if value[0] == '[' and value[len(value)-1] == ']':
+        value = value.strip('[]')
+        value = [element.strip() for element in value.split(',')]
 
-        if value[0] == '[' and value[len(value)-1] == ']':
-            value = value.strip('[]')
-            value = [element.strip() for element in value.split(',')]
+    return (name, value)
 
+<<<<<<< HEAD
         return (name, value)
 
+=======
+>>>>>>> 84772880441058b1dbf2209a38b791dc6828744f
 def get_seq(line):
     # To do
     pass
