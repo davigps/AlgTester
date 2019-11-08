@@ -11,9 +11,18 @@ class GeneratorInput:
             '$', 'int(', 'float(', 
             'bool()', 'str('
         ]
+
+        # Adding the utils tokens before key_words
+        self.utils = [
+            'seq('
+        ]
+        for util in self.utils:
+            self.__key_words.insert(0, util)
+
         self.__statements = {
             'int(': get_int, 'float(': get_float, 
-            'bool(': get_bool, 'str(': get_str
+            'bool(': get_bool, 'str(': get_str,
+            'seq(': get_seq
         }
 
         self.variables = {}

@@ -1,4 +1,4 @@
-$lista = [davi, joaquim, amarildo, escravisaura]
+$lista = [davi, joaquim, amarildo, isaura]
 $vez = int(1<>2)
 
 input:
