@@ -126,7 +126,7 @@ def get_bool(line):
 
 def get_attrib(line):
     '''
-    Return the variable name and its value, wich exists in line. 
+    Return the variable name and its value, which exists in line. 
     '''
     line = line.split('$')[1]
     name, value = [term.strip() for term in line.split('=')]
