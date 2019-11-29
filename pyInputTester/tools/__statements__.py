@@ -125,6 +125,10 @@ def get_bool(line):
 
 
 def get_attrib(line):
+    '''
+    Get the attribution line on the input area
+    and return the variable name e its value.
+    '''
     line = line.split('$')[1]
     name, value = [term.strip() for term in line.split('=')]
 
@@ -135,7 +139,20 @@ def get_attrib(line):
     return (name, value)
 
 
+'''
+----- Util Statements
+'''
+
+
 def get_seq(line):
+    '''
+    Get a sequence in line and return it with all "seq" occurrences replaced.
+    Origin line: "seq(int(-10<>10), 3)"
+    Returned line: "int(-10<>10) int(-10<>10) int(-10<>10)"
+    Or maybe:
+    Origin line: "seq(2, 5)"
+    Returned line: "2 2 2 2 2"
+    '''
     __config = __split('seq', line)
     for params in __config:
         item, times = [item.strip() for item in params.split(',')]
@@ -146,6 +163,10 @@ def get_seq(line):
         line = line.replace('seq(' + params + ')', string, 1)
     return line
 
+
+'''
+----- Local Tests
+'''
 
 if __name__ == "__main__":
     line = 'str(4, a...e) seq(int(0<>10), 5) bool() int(0<>100) float(3<>5, 2) str(3, a...b) int(5<>10)'
