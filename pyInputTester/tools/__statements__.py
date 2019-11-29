@@ -1,5 +1,5 @@
-#from pyInputTester.tools.Types import *
-from Types import *
+from pyInputTester.tools.Types import BooleanType, FloatType, StringType, IntegerType
+# from Types import *
 '''
 Essas funções possuem a função de receber uma linha com os tipos de entradas necessários
 e as limitações de cada entrada, ex: int(0<>100) bool(). E retorna as linhas preenchidas
