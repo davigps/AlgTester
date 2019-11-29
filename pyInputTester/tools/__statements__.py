@@ -126,8 +126,7 @@ def get_bool(line):
 
 def get_attrib(line):
     '''
-    Get the attribution line on the input area
-    and return the variable name e its value.
+    Return the variable name and its value, wich exists in line. 
     '''
     line = line.split('$')[1]
     name, value = [term.strip() for term in line.split('=')]
