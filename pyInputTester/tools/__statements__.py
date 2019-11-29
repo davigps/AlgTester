@@ -137,7 +137,6 @@ def get_attrib(line):
 
 def get_seq(line):
     __config = __split('seq', line)
-    print(__config)
     for params in __config:
         item, times = [item.strip() for item in params.split(',')]
         string = ''
