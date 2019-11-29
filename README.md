@@ -3,7 +3,7 @@
  <img width=200px height=200px src="./assets/images/logo.png" alt="Project logo"></a>
 </p>
 
-<h3 align="center">pyInputTester (Under development)</h3>
+<h3 align="center">AlgTester (Under development)</h3>
 
 <div align="center">
 
@@ -15,7 +15,7 @@
 ---
 
 <p align="center"> 
-    pyInputTester allows you to generate input tests cases and save tests reports of a another python program.
+    AlgTester allows you to generate input test cases and save tests reports of yours Algorithm Programs.
     <br> 
 </p>
 

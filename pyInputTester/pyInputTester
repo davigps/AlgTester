@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+# coding: "utf-8"
+#from pyInputTester.tools.GeneratorInput import GeneratorInput
+#from pyInputTester.tools.Tester import Tester
+import sys 
+# In this file will be build the CLI program
+#class InputTester:
+#   pass
+print(sys.argv)
