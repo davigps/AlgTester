@@ -1,9 +1,11 @@
 import sys
-sys.path.append('..')
+
+sys.path.append("..")
 
 from pyInputTester.tools.GeneratorInput import GeneratorInput
 
-generator = GeneratorInput(3, 'while.test')
+generator = GeneratorInput(3, "while.test")
 
 cases = generator.generate_inputs()
-print(cases)
+for case in cases:
+    print(case)
