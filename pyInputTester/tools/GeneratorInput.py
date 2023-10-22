@@ -1,29 +1,33 @@
-from pyInputTester.tools.__statements__ import get_float, get_int, get_bool, get_str, get_seq, get_attrib
 from random import choice
+
+from pyInputTester.tools.__statements__ import (
+    get_attrib,
+    get_bool,
+    get_float,
+    get_int,
+    get_seq,
+    get_str,
+)
 
 
 class GeneratorInput:
-
     def __init__(self, number_of_cases, test_file):
         self.number_of_cases = number_of_cases
-        self.__file = open(test_file, 'r').readlines()
+        self.__file = open(test_file, "r").readlines()
 
-        self.__key_words = [
-            '$', 'int(', 'float(',
-            'bool()', 'str('
-        ]
+        self.__key_words = ["$", "int(", "float(", "bool()", "str("]
 
         # Adding the utils tokens before key_words
-        self.utils = [
-            'seq('
-        ]
+        self.utils = ["seq("]
         for util in self.utils:
             self.__key_words.insert(0, util)
 
         self.__statements = {
-            'int(': get_int, 'float(': get_float,
-            'bool()': get_bool, 'str(': get_str,
-            'seq(': get_seq
+            "int(": get_int,
+            "float(": get_float,
+            "bool()": get_bool,
+            "str(": get_str,
+            "seq(": get_seq,
         }
 
         self.variables = {}
@@ -39,11 +43,11 @@ class GeneratorInput:
     def search_variables(self):
         for line in self.__file:
             line = line.strip()
-            if line == 'input:':
+            if line == "input:":
                 return None
 
             keys = self.__get_statements(line)
-            if len(keys) != 0 and keys[0] == '$':
+            if len(keys) != 0 and keys[0] == "$":
                 name, value = get_attrib(line)
 
                 keys = self.__get_statements(value)
@@ -71,7 +75,7 @@ class GeneratorInput:
         for line in self.__file:
             if declaration:
                 input_lines.append(line)
-            elif line.strip() == 'input:':
+            elif line.strip() == "input:":
                 declaration = True
         return input_lines
 
@@ -85,7 +89,7 @@ class GeneratorInput:
                 if type(value) == list:
                     value = choice(value)
 
-                lines[i] = lines[i].replace('$' + name, value)
+                lines[i] = lines[i].replace("$" + name, value)
 
         return lines
 
@@ -97,7 +101,7 @@ class GeneratorInput:
                 break
 
         declaration_line = lines[start]
-        param = declaration_line.split(scope)[1].split(')')[0]
+        param = declaration_line.split(scope)[1].split(")")[0]
         param = self.__resolve_variables([param])[0]
 
         i = start + 1
@@ -106,21 +110,16 @@ class GeneratorInput:
         stack = [True]
 
         while len(stack) > 0:
-            if '{' in lines[i]:
+            if "{" in lines[i]:
                 stack.append(True)
-            if lines[i].strip() == '}':
+            if lines[i].strip() == "}":
                 stack.pop()
 
             scope_lines.append(lines[i])
             i += 1
         scope_lines.pop()
 
-        return {
-            "start": start,
-            "end": i - 1,
-            "scope": scope_lines,
-            "param": param
-        }
+        return {"start": start, "end": i - 1, "scope": scope_lines, "param": param}
 
     def __scope_exists(self, scope, lines):
         for line in lines:
@@ -131,8 +130,8 @@ class GeneratorInput:
     def __resolve_for(self, lines):
         lines = lines[:]
 
-        while self.__scope_exists('for(', lines):
-            for_scope = self.__get_scope('for(', lines)
+        while self.__scope_exists("for(", lines):
+            for_scope = self.__get_scope("for(", lines)
 
             for i in range(len(for_scope["scope"]) + 2):
                 lines.pop(for_scope["start"])
@@ -146,21 +145,30 @@ class GeneratorInput:
     def __resolve_while(self, lines):
         lines = lines[:]
 
-        while self.__scope_exists('whilenot(', lines):
-            while_scope = self.__get_scope('whilenot(', lines)
+        while self.__scope_exists("whilenot(", lines):
+            while_scope = self.__get_scope("whilenot(", lines)
 
             for i in range(len(while_scope["scope"]) + 2):
                 lines.pop(while_scope["start"])
 
-            lines.insert(while_scope["start"], while_scope["param"] + '\n')
-            while choice([False, True, True, True, True]):
+            lines.insert(while_scope["start"], while_scope["param"] + "\n")
+
+            # Should have a 20% chance of not entering the while loop
+            dont_stop = choice([True, True, True, True, True])
+            attempts = 0
+            MAX_ATTEMPTS = 100
+
+            while dont_stop:
+                attempts += 1
+                if attempts > MAX_ATTEMPTS:
+                    break
+
                 for j in range(len(while_scope["scope"]) - 1, -1, -1):
                     lines.insert(while_scope["start"], while_scope["scope"][j])
 
         return lines
 
     def generate_inputs(self):
-
         for case in range(self.number_of_cases):
             lines = self.__get_input_lines()
 
@@ -170,9 +178,9 @@ class GeneratorInput:
             lines = self.__resolve_variables(lines)
             lines = self.__read_lines(lines)
 
-            case = ''
+            case = ""
             for line in lines:
                 case += line
-            self.inputs_created.append(case + '\n')
+            self.inputs_created.append(case + "\n")
 
         return self.inputs_created
